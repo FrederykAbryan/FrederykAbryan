@@ -4,7 +4,7 @@
 - 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me ...
 
-https://abryanfrederyk.id/
+https://frederyk-abryan.com/
 
 <!---
 FrederykAbryan/FrederykAbryan is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
