@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @FrederykAbryan
 - 👀 I’m interested in coding, anime and reading
-- 🌱 I’m currently learning REACT JS
+- 🌱 I’m currently learning VueJS, React Native
 - 📫 How to reach me
 
 <!---
