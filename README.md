@@ -17,3 +17,5 @@ You can click the Preview link to take a look at your changes.
 <!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
 <a href="https://app.daily.dev/fabryan03"><img src="https://api.daily.dev/devcards/bf31f7976e864a2398b460eb1bc851e5.png?r=nca" width="400" alt="Frederyk Abryan's Dev Card"/></a>
 
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
