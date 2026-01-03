@@ -1,10 +1,9 @@
-<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
-
             .text-amdg {
-                font-family: 'Press Start 2P', monospace;
+                font-family: 'Courier New', 'Courier', monospace;
+                font-weight: bold;
                 font-size: 48px;
                 fill: #ffd700;
                 text-anchor: middle;
@@ -14,7 +13,8 @@
             }
 
             .text-full {
-                font-family: 'Press Start 2P', monospace;
+                font-family: 'Courier New', 'Courier', monospace;
+                font-weight: bold;
                 font-size: 18px;
                 fill: #f0f0f0;
                 text-anchor: middle;
@@ -24,7 +24,7 @@
             }
 
             .sunburst-container {
-                transform-origin: 200px 200px;
+                transform-origin: 400px 200px;
                 animation: rotate-slow 80s linear infinite;
                 shape-rendering: crispEdges;
             }
@@ -34,7 +34,8 @@
             }
             
             .quad-char {
-                font-family: 'Press Start 2P', monospace;
+                font-family: 'Courier New', 'Courier', monospace;
+                font-weight: bold;
                 font-size: 40px;
                 fill: url(#goldLinear);
                 text-anchor: middle;
@@ -71,22 +72,32 @@
     </defs>
 
     <!-- Background -->
-    <rect width="400" height="400" fill="#050505"/>
+    <rect width="800" height="400" fill="#050505"/>
 
     <!-- SCENE 1: AMDG (Acronym) -->
     <g id="scene-1" opacity="0">
-        <text x="200" y="200" class="text-amdg">A.M.D.G.</text>
+        <text x="400" y="200" class="text-amdg">A.M.D.G.</text>
         
-        <!-- Fade in, hold, fade out -->
-        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="3s" begin="0s;14.5s" fill="freeze"/>
+        <!-- Shows 0-3s in 15s cycle -->
+        <animate attributeName="opacity" 
+                 values="0;1;1;0;0" 
+                 keyTimes="0;0.013;0.187;0.2;1" 
+                 dur="15s" 
+                 repeatCount="indefinite" 
+                 fill="freeze"/>
     </g>
 
     <!-- SCENE 2: Full Phrase -->
     <g id="scene-2" opacity="0">
-        <text x="200" y="200" class="text-full">Ad Maiorem Dei Gloriam</text>
+        <text x="400" y="200" class="text-full">Ad Maiorem Dei Gloriam</text>
         
-        <!-- Fade in, hold, fade out -->
-        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="3.5s" begin="3s;17.5s" fill="freeze"/>
+        <!-- Shows 3-6.5s in 15s cycle -->
+        <animate attributeName="opacity" 
+                 values="0;0;1;1;0;0" 
+                 keyTimes="0;0.2;0.213;0.42;0.433;1" 
+                 dur="15s" 
+                 repeatCount="indefinite" 
+                 fill="freeze"/>
     </g>
 
     <!-- SCENE 3: The Logo (Cross with AMDG Quadrants) -->
@@ -96,7 +107,7 @@
         <g id="sunburst-group" class="sunburst-container"></g>
         
         <!-- Static Central Logo -->
-        <g class="logo-static" transform="translate(200, 200)">
+        <g class="logo-static" transform="translate(400, 200)">
             
             <!-- Solid backing circle -->
             <circle cx="0" cy="0" r="110" fill="#000" opacity="0.6" />
@@ -137,8 +148,13 @@
 
         </g>
 
-        <!-- Fade in and stay visible -->
-        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.95;1" dur="8.5s" begin="6.5s;21s" fill="freeze"/>
+        <!-- Shows 6.5-15s in 15s cycle -->
+        <animate attributeName="opacity" 
+                 values="0;0;1;1;0" 
+                 keyTimes="0;0.433;0.446;0.967;1" 
+                 dur="15s" 
+                 repeatCount="indefinite" 
+                 fill="freeze"/>
     </g>
 
     <script type="text/javascript">
@@ -146,7 +162,7 @@
         // Generate Sunburst Rays for Scene 3
         const sunburstGroup = document.getElementById('sunburst-group');
         const numRays = 40; 
-        const centerX = 200;
+        const centerX = 400;
         const centerY = 200;
         const innerRadius = 120;
         const outerRadiusLong = 210;
