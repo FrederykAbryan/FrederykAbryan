@@ -1,132 +1,109 @@
 <svg fill="none" viewBox="0 0 837 221" width="837" xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="837px" height="100%">
     <style xmlns="http://www.w3.org/1999/xhtml">
-      .container {
-        width: 837px;
-        height: 221px;
-        position: relative;
-        background: #0d1117;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      .container { width: 837px; height: 221px; position: relative; background: #0d1117; }
+      .bg { position: absolute; top: 0; left: 0; display: flex; flex-direction: column; gap: 3px; }
+      .bg .line { display: flex; gap: 3px; }
+      .bg span { width: 11px; height: 11px; background: #161b22; border-radius: 2px; }
+      
+      .content { width: 100%; height: 100%; position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; }
+      .slide { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; gap: 3px; opacity: 0; }
+
+      /* Animation Sequences */
+      .slide-1 { animation: anim-1 12s infinite; }
+      .slide-2 { animation: anim-2 12s infinite; }
+      .slide-3 { animation: anim-3 12s infinite; }
+
+      @keyframes anim-1 { 
+        0%, 30% { opacity: 1; transform: scale(1); }
+        33%, 100% { opacity: 0; transform: scale(0.9); }
       }
-      .bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
+      @keyframes anim-2 { 
+        0%, 33% { opacity: 0; transform: translateY(10px); }
+        36%, 63% { opacity: 1; transform: translateY(0); }
+        66%, 100% { opacity: 0; }
       }
-      .bg .line {
-        display: flex;
-        gap: 3px;
-      }
-      .bg span {
-        width: 11px;
-        height: 11px;
-        background: #161b22;
-        border-radius: 2px;
-      }
-      .content {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1;
-      }
-      .slide {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
+      @keyframes anim-3 { 
+        0%, 66% { opacity: 0; }
+        70%, 96% { opacity: 1; }
+        100% { opacity: 0; }
       }
 
-      /* Animation timing for the 3 messages */
-      .slide-1 { animation: anim-fade 9s infinite; }
-      .slide-2 { animation: anim-fade 9s infinite 3s; }
-      .slide-3 { animation: anim-fade 9s infinite 6s; }
-
-      @keyframes anim-fade {
-        0%, 5% { opacity: 0; transform: scale(0.95); }
-        10%, 30% { opacity: 1; transform: scale(1); }
-        35%, 100% { opacity: 0; }
-      }
-
-      .text-row {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-      .msg-text {
-        color: #3aad52;
-        font-weight: 800;
-        font-size: 42px;
-        letter-spacing: 4px;
-        text-shadow: 0 0 8px rgba(58, 173, 82, 0.4);
-      }
-      .error-color {
-        color: #f85149;
-        text-shadow: 0 0 8px rgba(248, 81, 73, 0.4);
-      }
-
-      /* Pixel block styling to match the original "GitHub contribution" aesthetic */
-      .pixel-box {
-        width: 11px;
-        height: 11px;
-        border-radius: 2px;
-        display: inline-block;
-      }
-      .green { background: #3aad52; }
-      .red { background: #f85149; }
+      .char-container { display: flex; flex-direction: column; gap: 3px; }
+      .char-container .line { display: flex; gap: 3px; }
+      .char-container .line .box { width: 11px; height: 11px; border-radius: 2px; background: #161b22; }
+      .char-container .line .box.active { background: #3aad52; box-shadow: 0 0 8px rgba(58, 173, 82, 0.5); }
+      
+      .phrase-text { color: #3aad52; font-family: monospace; font-size: 32px; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 10px #3aad52; }
+      
+      /* AMDG Logo Stylized IHS */
+      .logo-box { width: 15px; height: 15px; border-radius: 2px; }
     </style>
 
     <div xmlns="http://www.w3.org/1999/xhtml" class="container">
       <div class="bg">
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="line" style="display:flex; gap:3px;">
+          <script>
+            for(let i=0; i&lt;16; i++) {
+              document.write('&lt;div class="line"&gt;');
+              for(let j=0; j&lt;60; j++) document.write('&lt;span&gt;&lt;/span&gt;');
+              document.write('&lt;/div&gt;');
+            }
+          </script>
+        </div>
       </div>
 
       <div class="content">
         <div class="slide slide-1">
-          <div class="msg-text error-color">ERROR</div>
-          <div class="text-row">
-            <span class="pixel-box red"></span><span class="pixel-box red"></span><span class="pixel-box red"></span><span class="pixel-box red"></span>
+          <div class="char-container">
+            <div class="line"><span class="box"></span><span class="box active"></span><span class="box active"></span><span class="box"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
+          </div>
+          <div class="char-container">
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
+          </div>
+          <div class="char-container">
+            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box"></span></div>
+          </div>
+          <div class="char-container">
+            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box"></span></div>
+            <div class="line"><span class="box active"></span><span class="box"></span><span class="box active"></span><span class="box active"></span></div>
+            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box active"></span></div>
           </div>
         </div>
 
         <div class="slide slide-2">
-          <div class="msg-text error-color">404</div>
-          <div class="text-row">
-            <span class="pixel-box red"></span><span class="pixel-box red"></span><span class="pixel-box red"></span>
-          </div>
+          <div class="phrase-text">AD MAIOREM DEI GLORIAM</div>
         </div>
 
         <div class="slide slide-3">
-          <div class="msg-text">CODE</div>
-          <div class="msg-text" style="font-size: 24px; letter-spacing: 2px;">NOT FOUND</div>
-          <div class="text-row" style="margin-top:10px;">
-            <span class="pixel-box green"></span><span class="pixel-box green"></span><span class="pixel-box green"></span><span class="pixel-box green"></span><span class="pixel-box green"></span>
+          <div class="char-container">
+            <div class="line">
+              <span class="box active"></span><span class="box active"></span><span class="box active"></span>
+            </div>
+            <div class="line">
+              <span class="box"></span><span class="box active"></span><span class="box"></span>
+            </div>
+            <div class="line">
+              <span class="box active"></span><span class="box active"></span><span class="box active"></span>
+            </div>
+            <div class="line">
+              <span class="box active"></span><span class="box"></span><span class="box active"></span>
+            </div>
+            <div class="line">
+              <span class="box active"></span><span class="box active"></span><span class="box active"></span>
+            </div>
           </div>
         </div>
       </div>
