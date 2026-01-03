@@ -76,7 +76,7 @@
 
     <!-- SCENE 1: AMDG (Acronym) -->
     <g id="scene-1" opacity="0">
-        <text x="400" y="200" class="text-amdg">A.M.D.G.</text>
+        <text x="400" y="200" class="text-amdg">A.M.D.G</text>
         
         <!-- Shows 0-3s in 15s cycle -->
         <animate attributeName="opacity" 
