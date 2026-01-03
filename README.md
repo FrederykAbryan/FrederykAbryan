@@ -1,3 +1,5 @@
+<img src="animation.svg" alt="Moving Animation" />
+
 - 👋 Hi, I’m @FrederykAbryan
 - 👀 I’m interested in coding, anime and reading
 - 🌱 I’m currently learning VueJS, React Native
