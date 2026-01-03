@@ -1,112 +1,277 @@
-<svg fill="none" viewBox="0 0 837 221" width="837" xmlns="http://www.w3.org/2000/svg">
-  <foreignObject width="837px" height="100%">
-    <style xmlns="http://www.w3.org/1999/xhtml">
-      .container { width: 837px; height: 221px; position: relative; background: #0d1117; }
-      .bg { position: absolute; top: 0; left: 0; display: flex; flex-direction: column; gap: 3px; }
-      .bg .line { display: flex; gap: 3px; }
-      .bg span { width: 11px; height: 11px; background: #161b22; border-radius: 2px; }
-      
-      .content { width: 100%; height: 100%; position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; }
-      .slide { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; gap: 3px; opacity: 0; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMDG Animation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Pinyon+Script&display=swap');
 
-      /* Animation Sequences */
-      .slide-1 { animation: anim-1 12s infinite; }
-      .slide-2 { animation: anim-2 12s infinite; }
-      .slide-3 { animation: anim-3 12s infinite; }
+        body {
+            background-color: #050505;
+            color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
 
-      @keyframes anim-1 { 
-        0%, 30% { opacity: 1; transform: scale(1); }
-        33%, 100% { opacity: 0; transform: scale(0.9); }
-      }
-      @keyframes anim-2 { 
-        0%, 33% { opacity: 0; transform: translateY(10px); }
-        36%, 63% { opacity: 1; transform: translateY(0); }
-        66%, 100% { opacity: 0; }
-      }
-      @keyframes anim-3 { 
-        0%, 66% { opacity: 0; }
-        70%, 96% { opacity: 1; }
-        100% { opacity: 0; }
-      }
+        /* SVG container */
+        .svg-container {
+            width: 90vmin;
+            height: 90vmin;
+            position: relative;
+        }
 
-      .char-container { display: flex; flex-direction: column; gap: 3px; }
-      .char-container .line { display: flex; gap: 3px; }
-      .char-container .line .box { width: 11px; height: 11px; border-radius: 2px; background: #161b22; }
-      .char-container .line .box.active { background: #3aad52; box-shadow: 0 0 8px rgba(58, 173, 82, 0.5); }
-      
-      .phrase-text { color: #3aad52; font-family: monospace; font-size: 32px; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 10px #3aad52; }
-      
-      /* AMDG Logo Stylized IHS */
-      .logo-box { width: 15px; height: 15px; border-radius: 2px; }
+        svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* Scene Transition Logic */
+        .scene {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        .scene.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .scene.inactive {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        /* Text styles */
+        .text-amdg {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 80px;
+            fill: #ffd700;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            filter: drop-shadow(0px 0px 15px rgba(255, 215, 0, 0.4));
+        }
+
+        .text-full {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 36px;
+            fill: #f0f0f0;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.2));
+        }
+
+        /* Logo Styles */
+        .sunburst-container {
+            transform-origin: center;
+            animation: rotate-slow 80s linear infinite;
+        }
+        
+        .logo-static {
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.9));
+        }
+        
+        /* Quadrant Letters */
+        .quad-char {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            /* Reduced size for better spacing */
+            font-size: 60px; 
+            fill: url(#goldLinear);
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
+</head>
+<body>
 
-    <div xmlns="http://www.w3.org/1999/xhtml" class="container">
-      <div class="bg">
-        <div class="line" style="display:flex; gap:3px;">
-          <script>
-            for(let i=0; i&lt;16; i++) {
-              document.write('&lt;div class="line"&gt;');
-              for(let j=0; j&lt;60; j++) document.write('&lt;span&gt;&lt;/span&gt;');
-              document.write('&lt;/div&gt;');
-            }
-          </script>
-        </div>
-      </div>
+    <div class="svg-container">
+        <svg viewBox="0 0 400 400" id="main-svg">
+            <defs>
+                <!-- Master Gold Gradient -->
+                <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ffed8b;stop-opacity:1" />
+                    <stop offset="30%" style="stop-color:#ffd700;stop-opacity:1" />
+                    <stop offset="70%" style="stop-color:#b8860b;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#8b6508;stop-opacity:1" />
+                </linearGradient>
 
-      <div class="content">
-        <div class="slide slide-1">
-          <div class="char-container">
-            <div class="line"><span class="box"></span><span class="box active"></span><span class="box active"></span><span class="box"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
-          </div>
-          <div class="char-container">
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
-          </div>
-          <div class="char-container">
-            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box"></span></div>
-          </div>
-          <div class="char-container">
-            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box"></span><span class="box"></span></div>
-            <div class="line"><span class="box active"></span><span class="box"></span><span class="box active"></span><span class="box active"></span></div>
-            <div class="line"><span class="box active"></span><span class="box active"></span><span class="box active"></span><span class="box active"></span></div>
-          </div>
-        </div>
+                <!-- Radial for Sunburst -->
+                <radialGradient id="goldRadial" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                    <stop offset="40%" style="stop-color:#ffd700;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
+                </radialGradient>
+            </defs>
 
-        <div class="slide slide-2">
-          <div class="phrase-text">AD MAIOREM DEI GLORIAM</div>
-        </div>
+            <!-- SCENE 1: AMDG (Acronym) -->
+            <g id="scene-1" class="scene inactive" style="transform-origin: center;">
+                <text x="200" y="200" class="text-amdg">A.M.D.G.</text>
+            </g>
 
-        <div class="slide slide-3">
-          <div class="char-container">
-            <div class="line">
-              <span class="box active"></span><span class="box active"></span><span class="box active"></span>
-            </div>
-            <div class="line">
-              <span class="box"></span><span class="box active"></span><span class="box"></span>
-            </div>
-            <div class="line">
-              <span class="box active"></span><span class="box active"></span><span class="box active"></span>
-            </div>
-            <div class="line">
-              <span class="box active"></span><span class="box"></span><span class="box active"></span>
-            </div>
-            <div class="line">
-              <span class="box active"></span><span class="box active"></span><span class="box active"></span>
-            </div>
-          </div>
-        </div>
-      </div>
+            <!-- SCENE 2: Full Phrase -->
+            <g id="scene-2" class="scene inactive" style="transform-origin: center;">
+                <text x="200" y="200" class="text-full">Ad Maiorem Dei Gloriam</text>
+            </g>
+
+            <!-- SCENE 3: The Logo (Cross with AMDG Quadrants) -->
+            <g id="scene-3" class="scene inactive" style="transform-origin: center;">
+                
+                <!-- Rotating Sunburst (Background) -->
+                <g id="sunburst-group" class="sunburst-container"></g>
+                
+                <!-- Static Central Logo -->
+                <g class="logo-static" transform="translate(200, 200)">
+                    
+                    <!-- Solid backing circle to help legibility against rays -->
+                    <circle cx="0" cy="0" r="110" fill="#000" opacity="0.6" />
+
+                    <!-- THE CROSS -->
+                    <g fill="url(#goldLinear)">
+                        <!-- Vertical Beam -->
+                        <path d="M-15 -95 L15 -95 L15 95 L-15 95 Z" />
+                        <!-- Horizontal Beam -->
+                        <path d="M-75 -15 L75 -15 L75 15 L-75 15 Z" />
+                        
+                        <!-- Serifs (Decorative ends for the cross) -->
+                        <!-- Top -->
+                        <path d="M-20 -95 L20 -95 L20 -85 L15 -85 L15 -90 L-15 -90 L-15 -85 L-20 -85 Z" />
+                        <!-- Bottom -->
+                        <path d="M-20 95 L20 95 L20 85 L15 85 L15 90 L-15 90 L-15 85 L-20 85 Z" />
+                        <!-- Left -->
+                        <path d="M-75 -20 L-75 20 L-65 20 L-65 15 L-70 15 L-70 -15 L-65 -15 L-65 -20 Z" />
+                        <!-- Right -->
+                        <path d="M75 -20 L75 20 L65 20 L65 15 L70 15 L70 -15 L65 -15 L65 -20 Z" />
+                    </g>
+
+                    <!-- THE LETTERS (A M D G) in Quadrants -->
+                    <!-- Positioned further out and centered vertically in spaces -->
+                    
+                    <!-- Top Left: A -->
+                    <text x="-50" y="-50" class="quad-char">A</text>
+                    
+                    <!-- Top Right: M -->
+                    <text x="50" y="-50" class="quad-char">M</text>
+                    
+                    <!-- Bottom Left: D -->
+                    <text x="-50" y="50" class="quad-char">D</text>
+                    
+                    <!-- Bottom Right: G -->
+                    <text x="50" y="50" class="quad-char">G</text>
+
+                </g>
+            </g>
+        </svg>
     </div>
-  </foreignObject>
-</svg>
+
+    <script>
+        // Generate Sunburst Rays for Scene 3
+        const sunburstGroup = document.getElementById('sunburst-group');
+        const numRays = 40; 
+        const centerX = 200;
+        const centerY = 200;
+        const innerRadius = 120; // Increased clearance for text
+        const outerRadiusLong = 210;
+        const outerRadiusShort = 165;
+
+        for (let i = 0; i < numRays; i++) {
+            const angleDeg = (i * 360 / numRays);
+            const angleRad = angleDeg * (Math.PI / 180);
+            const isFlame = i % 2 !== 0; 
+            
+            const x1 = centerX + Math.cos(angleRad) * innerRadius;
+            const y1 = centerY + Math.sin(angleRad) * innerRadius;
+            const rEnd = isFlame ? outerRadiusLong : outerRadiusShort;
+            const x2 = centerX + Math.cos(angleRad) * rEnd;
+            const y2 = centerY + Math.sin(angleRad) * rEnd;
+
+            let d = '';
+
+            if (!isFlame) {
+                // Straight Ray
+                const width = 3; 
+                const perpX = -Math.sin(angleRad) * (width/2);
+                const perpY = Math.cos(angleRad) * (width/2);
+                
+                const b1x = x1 + perpX;
+                const b1y = y1 + perpY;
+                const b2x = x1 - perpX;
+                const b2y = y1 - perpY;
+
+                d = `M ${b1x} ${b1y} L ${x2} ${y2} L ${b2x} ${b2y} Z`;
+            } else {
+                // Wavy Ray
+                const cpDist = (rEnd - innerRadius) / 3;
+                const wiggleAmp = 9;
+                const perpX = -Math.sin(angleRad);
+                const perpY = Math.cos(angleRad);
+                
+                const cx1 = centerX + Math.cos(angleRad) * (innerRadius + cpDist) + perpX * wiggleAmp;
+                const cy1 = centerY + Math.sin(angleRad) * (innerRadius + cpDist) + perpY * wiggleAmp;
+                const cx2 = centerX + Math.cos(angleRad) * (innerRadius + cpDist * 2) - perpX * wiggleAmp;
+                const cy2 = centerY + Math.sin(angleRad) * (innerRadius + cpDist * 2) - perpY * wiggleAmp;
+
+                d = `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`;
+            }
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", d);
+            
+            if (!isFlame) {
+                path.setAttribute("fill", "url(#goldRadial)");
+                path.setAttribute("stroke", "none");
+            } else {
+                path.setAttribute("stroke", "url(#goldRadial)");
+                path.setAttribute("stroke-width", "4");
+                path.setAttribute("fill", "none");
+                path.setAttribute("stroke-linecap", "round");
+            }
+            sunburstGroup.appendChild(path);
+        }
+
+        // Animation Sequence
+        const scenes = [
+            document.getElementById('scene-1'),
+            document.getElementById('scene-2'),
+            document.getElementById('scene-3')
+        ];
+        let currentStep = 0;
+        const timings = [3000, 3500, 8000]; 
+
+        function activateScene(index) {
+            scenes.forEach(s => {
+                s.classList.remove('active');
+                s.classList.add('inactive');
+            });
+            setTimeout(() => {
+                scenes[index].classList.remove('inactive');
+                scenes[index].classList.add('active');
+            }, 100); 
+        }
+
+        function runSequence() {
+            activateScene(currentStep);
+            setTimeout(() => {
+                currentStep = (currentStep + 1) % scenes.length;
+                runSequence();
+            }, timings[currentStep]);
+        }
+
+        window.onload = () => {
+            setTimeout(runSequence, 500);
+        };
+    </script>
+</body>
+</html>
