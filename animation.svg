@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg viewBox="0 0 400 400" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>AMDG Animation</title>
     
     <defs>
-        <!-- Fonts -->
-        <style type="text/css">
+        <style>
             @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&amp;family=Pinyon+Script&amp;display=swap');
 
-            /* Scene Transition Logic */
+            /* Default State: Scene 1 is VISIBLE, others hidden. 
+               This ensures no black screen if JS fails. */
+            #scene-1 { opacity: 1; transform: scale(1); }
+            #scene-2 { opacity: 0; transform: scale(0.95); }
+            #scene-3 { opacity: 0; transform: scale(0.95); }
+
             .scene {
-                opacity: 0;
                 transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+                transform-origin: center;
                 pointer-events: none;
             }
 
-            .scene.active {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            .scene.inactive {
-                opacity: 0;
-                transform: scale(0.95);
-            }
+            /* Active Classes managed by JS */
+            .scene.active { opacity: 1; transform: scale(1); }
+            .scene.inactive { opacity: 0; transform: scale(0.95); }
 
             /* Text styles */
             .text-amdg {
@@ -44,7 +42,7 @@
                 filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.2));
             }
 
-            /* Logo Styles */
+            /* Sunburst Animation (CSS Rotation) */
             .sunburst-container {
                 transform-origin: center;
                 animation: rotate-slow 80s linear infinite;
@@ -54,7 +52,6 @@
                 filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.9));
             }
             
-            /* Quadrant Letters */
             .quad-char {
                 font-family: 'Cinzel', serif;
                 font-weight: 700;
@@ -70,7 +67,6 @@
             }
         </style>
 
-        <!-- Master Gold Gradient -->
         <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style="stop-color:#ffed8b;stop-opacity:1" />
             <stop offset="30%" style="stop-color:#ffd700;stop-opacity:1" />
@@ -78,7 +74,6 @@
             <stop offset="100%" style="stop-color:#8b6508;stop-opacity:1" />
         </linearGradient>
 
-        <!-- Radial for Sunburst -->
         <radialGradient id="goldRadial" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
             <stop offset="40%" style="stop-color:#ffd700;stop-opacity:1" />
             <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
@@ -89,157 +84,146 @@
     <rect width="100%" height="100%" fill="#050505" />
 
     <!-- SCENE 1: AMDG (Acronym) -->
-    <g id="scene-1" class="scene inactive" style="transform-origin: center;">
+    <g id="scene-1" class="scene" style="transform-origin: center;">
         <text x="200" y="200" class="text-amdg">A.M.D.G.</text>
     </g>
 
     <!-- SCENE 2: Full Phrase -->
-    <g id="scene-2" class="scene inactive" style="transform-origin: center;">
+    <g id="scene-2" class="scene" style="transform-origin: center;">
         <text x="200" y="200" class="text-full">Ad Maiorem Dei Gloriam</text>
     </g>
 
-    <!-- SCENE 3: The Logo (Cross with AMDG Quadrants) -->
-    <g id="scene-3" class="scene inactive" style="transform-origin: center;">
+    <!-- SCENE 3: The Logo -->
+    <g id="scene-3" class="scene" style="transform-origin: center;">
         
-        <!-- Rotating Sunburst (Background) -->
         <g id="sunburst-group" class="sunburst-container"></g>
         
-        <!-- Static Central Logo -->
         <g class="logo-static" transform="translate(200, 200)">
-            
-            <!-- Solid backing circle to help legibility against rays -->
+            <!-- Backing circle -->
             <circle cx="0" cy="0" r="110" fill="#000" opacity="0.6" />
 
-            <!-- THE CROSS -->
+            <!-- CROSS -->
             <g fill="url(#goldLinear)">
-                <!-- Vertical Beam -->
                 <path d="M-15 -95 L15 -95 L15 95 L-15 95 Z" />
-                <!-- Horizontal Beam -->
                 <path d="M-75 -15 L75 -15 L75 15 L-75 15 Z" />
-                
-                <!-- Serifs (Decorative ends for the cross) -->
-                <!-- Top -->
+                <!-- Serifs -->
                 <path d="M-20 -95 L20 -95 L20 -85 L15 -85 L15 -90 L-15 -90 L-15 -85 L-20 -85 Z" />
-                <!-- Bottom -->
                 <path d="M-20 95 L20 95 L20 85 L15 85 L15 90 L-15 90 L-15 85 L-20 85 Z" />
-                <!-- Left -->
                 <path d="M-75 -20 L-75 20 L-65 20 L-65 15 L-70 15 L-70 -15 L-65 -15 L-65 -20 Z" />
-                <!-- Right -->
                 <path d="M75 -20 L75 20 L65 20 L65 15 L70 15 L70 -15 L65 -15 L65 -20 Z" />
             </g>
 
-            <!-- THE LETTERS (A M D G) in Quadrants -->
-            <!-- Top Left: A -->
+            <!-- LETTERS A M D G -->
             <text x="-50" y="-50" class="quad-char">A</text>
-            
-            <!-- Top Right: M -->
             <text x="50" y="-50" class="quad-char">M</text>
-            
-            <!-- Bottom Left: D -->
             <text x="-50" y="50" class="quad-char">D</text>
-            
-            <!-- Bottom Right: G -->
             <text x="50" y="50" class="quad-char">G</text>
-
         </g>
     </g>
 
     <script type="text/javascript">
         <![CDATA[
-        // Generate Sunburst Rays for Scene 3
-        const sunburstGroup = document.getElementById('sunburst-group');
-        const numRays = 40; 
-        const centerX = 200;
-        const centerY = 200;
-        const innerRadius = 120;
-        const outerRadiusLong = 210;
-        const outerRadiusShort = 165;
+        (function() {
+            // Sunburst Generation
+            try {
+                const sunburstGroup = document.getElementById('sunburst-group');
+                if (sunburstGroup) {
+                    const numRays = 40; 
+                    const centerX = 200;
+                    const centerY = 200;
+                    const innerRadius = 120;
+                    const outerRadiusLong = 210;
+                    const outerRadiusShort = 165;
 
-        for (let i = 0; i < numRays; i++) {
-            const angleDeg = (i * 360 / numRays);
-            const angleRad = angleDeg * (Math.PI / 180);
-            const isFlame = i % 2 !== 0; 
+                    for (let i = 0; i < numRays; i++) {
+                        const angleDeg = (i * 360 / numRays);
+                        const angleRad = angleDeg * (Math.PI / 180);
+                        const isFlame = i % 2 !== 0; 
+                        
+                        const x1 = centerX + Math.cos(angleRad) * innerRadius;
+                        const y1 = centerY + Math.sin(angleRad) * innerRadius;
+                        const rEnd = isFlame ? outerRadiusLong : outerRadiusShort;
+                        const x2 = centerX + Math.cos(angleRad) * rEnd;
+                        const y2 = centerY + Math.sin(angleRad) * rEnd;
+
+                        let d = '';
+                        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+                        if (!isFlame) {
+                            const width = 3; 
+                            const perpX = -Math.sin(angleRad) * (width/2);
+                            const perpY = Math.cos(angleRad) * (width/2);
+                            d = `M ${x1+perpX} ${y1+perpY} L ${x2} ${y2} L ${x1-perpX} ${y1-perpY} Z`;
+                            path.setAttribute("fill", "url(#goldRadial)");
+                            path.setAttribute("stroke", "none");
+                        } else {
+                            const cpDist = (rEnd - innerRadius) / 3;
+                            const wiggleAmp = 9;
+                            const perpX = -Math.sin(angleRad);
+                            const perpY = Math.cos(angleRad);
+                            
+                            const cx1 = centerX + Math.cos(angleRad) * (innerRadius + cpDist) + perpX * wiggleAmp;
+                            const cy1 = centerY + Math.sin(angleRad) * (innerRadius + cpDist) + perpY * wiggleAmp;
+                            const cx2 = centerX + Math.cos(angleRad) * (innerRadius + cpDist * 2) - perpX * wiggleAmp;
+                            const cy2 = centerY + Math.sin(angleRad) * (innerRadius + cpDist * 2) - perpY * wiggleAmp;
+
+                            d = `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`;
+                            path.setAttribute("stroke", "url(#goldRadial)");
+                            path.setAttribute("stroke-width", "4");
+                            path.setAttribute("fill", "none");
+                            path.setAttribute("stroke-linecap", "round");
+                        }
+                        path.setAttribute("d", d);
+                        sunburstGroup.appendChild(path);
+                    }
+                }
+            } catch(e) { console.log("Sunburst gen failed: " + e); }
+
+            // Animation Logic
+            const scenes = [
+                document.getElementById('scene-1'),
+                document.getElementById('scene-2'),
+                document.getElementById('scene-3')
+            ];
             
-            const x1 = centerX + Math.cos(angleRad) * innerRadius;
-            const y1 = centerY + Math.sin(angleRad) * innerRadius;
-            const rEnd = isFlame ? outerRadiusLong : outerRadiusShort;
-            const x2 = centerX + Math.cos(angleRad) * rEnd;
-            const y2 = centerY + Math.sin(angleRad) * rEnd;
+            let currentStep = 0;
+            const timings = [3000, 3500, 8000]; 
 
-            let d = '';
-
-            if (!isFlame) {
-                // Straight Ray
-                const width = 3; 
-                const perpX = -Math.sin(angleRad) * (width/2);
-                const perpY = Math.cos(angleRad) * (width/2);
-                
-                const b1x = x1 + perpX;
-                const b1y = y1 + perpY;
-                const b2x = x1 - perpX;
-                const b2y = y1 - perpY;
-
-                d = `M ${b1x} ${b1y} L ${x2} ${y2} L ${b2x} ${b2y} Z`;
-            } else {
-                // Wavy Ray
-                const cpDist = (rEnd - innerRadius) / 3;
-                const wiggleAmp = 9;
-                const perpX = -Math.sin(angleRad);
-                const perpY = Math.cos(angleRad);
-                
-                const cx1 = centerX + Math.cos(angleRad) * (innerRadius + cpDist) + perpX * wiggleAmp;
-                const cy1 = centerY + Math.sin(angleRad) * (innerRadius + cpDist) + perpY * wiggleAmp;
-                const cx2 = centerX + Math.cos(angleRad) * (innerRadius + cpDist * 2) - perpX * wiggleAmp;
-                const cy2 = centerY + Math.sin(angleRad) * (innerRadius + cpDist * 2) - perpY * wiggleAmp;
-
-                d = `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`;
+            function activateScene(index) {
+                scenes.forEach((s, i) => {
+                    if(s) {
+                        if (i === index) {
+                            s.classList.remove('inactive');
+                            s.classList.add('active');
+                            // Specifically ensure opacity is 1 for the active scene
+                            // to override any CSS default conflicts
+                            s.style.opacity = "1";
+                            s.style.transform = "scale(1)";
+                        } else {
+                            s.classList.remove('active');
+                            s.classList.add('inactive');
+                            s.style.opacity = "0";
+                            s.style.transform = "scale(0.95)";
+                        }
+                    }
+                });
             }
 
-            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            path.setAttribute("d", d);
-            
-            if (!isFlame) {
-                path.setAttribute("fill", "url(#goldRadial)");
-                path.setAttribute("stroke", "none");
-            } else {
-                path.setAttribute("stroke", "url(#goldRadial)");
-                path.setAttribute("stroke-width", "4");
-                path.setAttribute("fill", "none");
-                path.setAttribute("stroke-linecap", "round");
+            function runSequence() {
+                activateScene(currentStep);
+                setTimeout(() => {
+                    currentStep = (currentStep + 1) % scenes.length;
+                    runSequence();
+                }, timings[currentStep]);
             }
-            sunburstGroup.appendChild(path);
-        }
 
-        // Animation Sequence
-        const scenes = [
-            document.getElementById('scene-1'),
-            document.getElementById('scene-2'),
-            document.getElementById('scene-3')
-        ];
-        let currentStep = 0;
-        const timings = [3000, 3500, 8000]; 
-
-        function activateScene(index) {
-            scenes.forEach(s => {
-                s.classList.remove('active');
-                s.classList.add('inactive');
-            });
-            setTimeout(() => {
-                scenes[index].classList.remove('inactive');
-                scenes[index].classList.add('active');
-            }, 100); 
-        }
-
-        function runSequence() {
-            activateScene(currentStep);
-            setTimeout(() => {
-                currentStep = (currentStep + 1) % scenes.length;
+            // Start
+            if (document.readyState === 'loading') {  
+                document.addEventListener('DOMContentLoaded', runSequence);
+            } else {  
                 runSequence();
-            }, timings[currentStep]);
-        }
-
-        // Start animation
-        setTimeout(runSequence, 500);
+            }
+        })();
         ]]>
     </script>
 </svg>
