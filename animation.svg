@@ -1,188 +1,157 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>AMDG Animation</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Pinyon+Script&display=swap');
+    
+    <defs>
+        <!-- Fonts -->
+        <style type="text/css">
+            @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&amp;family=Pinyon+Script&amp;display=swap');
 
-        body {
-            background-color: #050505;
-            color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
+            /* Scene Transition Logic */
+            .scene {
+                opacity: 0;
+                transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+                pointer-events: none;
+            }
 
-        /* SVG container */
-        .svg-container {
-            width: 90vmin;
-            height: 90vmin;
-            position: relative;
-        }
+            .scene.active {
+                opacity: 1;
+                transform: scale(1);
+            }
 
-        svg {
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-        }
+            .scene.inactive {
+                opacity: 0;
+                transform: scale(0.95);
+            }
 
-        /* Scene Transition Logic */
-        .scene {
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-            pointer-events: none;
-        }
+            /* Text styles */
+            .text-amdg {
+                font-family: 'Cinzel', serif;
+                font-weight: 700;
+                font-size: 80px;
+                fill: #ffd700;
+                text-anchor: middle;
+                dominant-baseline: middle;
+                filter: drop-shadow(0px 0px 15px rgba(255, 215, 0, 0.4));
+            }
 
-        .scene.active {
-            opacity: 1;
-            transform: scale(1);
-        }
+            .text-full {
+                font-family: 'Pinyon Script', cursive;
+                font-size: 36px;
+                fill: #f0f0f0;
+                text-anchor: middle;
+                dominant-baseline: middle;
+                filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.2));
+            }
 
-        .scene.inactive {
-            opacity: 0;
-            transform: scale(0.95);
-        }
+            /* Logo Styles */
+            .sunburst-container {
+                transform-origin: center;
+                animation: rotate-slow 80s linear infinite;
+            }
+            
+            .logo-static {
+                filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.9));
+            }
+            
+            /* Quadrant Letters */
+            .quad-char {
+                font-family: 'Cinzel', serif;
+                font-weight: 700;
+                font-size: 60px; 
+                fill: url(#goldLinear);
+                text-anchor: middle;
+                dominant-baseline: middle;
+            }
 
-        /* Text styles */
-        .text-amdg {
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 80px;
-            fill: #ffd700;
-            text-anchor: middle;
-            dominant-baseline: middle;
-            filter: drop-shadow(0px 0px 15px rgba(255, 215, 0, 0.4));
-        }
+            @keyframes rotate-slow {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        </style>
 
-        .text-full {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 36px;
-            fill: #f0f0f0;
-            text-anchor: middle;
-            dominant-baseline: middle;
-            filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.2));
-        }
+        <!-- Master Gold Gradient -->
+        <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffed8b;stop-opacity:1" />
+            <stop offset="30%" style="stop-color:#ffd700;stop-opacity:1" />
+            <stop offset="70%" style="stop-color:#b8860b;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#8b6508;stop-opacity:1" />
+        </linearGradient>
 
-        /* Logo Styles */
-        .sunburst-container {
-            transform-origin: center;
-            animation: rotate-slow 80s linear infinite;
-        }
+        <!-- Radial for Sunburst -->
+        <radialGradient id="goldRadial" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="40%" style="stop-color:#ffd700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
+        </radialGradient>
+    </defs>
+
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="#050505" />
+
+    <!-- SCENE 1: AMDG (Acronym) -->
+    <g id="scene-1" class="scene inactive" style="transform-origin: center;">
+        <text x="200" y="200" class="text-amdg">A.M.D.G.</text>
+    </g>
+
+    <!-- SCENE 2: Full Phrase -->
+    <g id="scene-2" class="scene inactive" style="transform-origin: center;">
+        <text x="200" y="200" class="text-full">Ad Maiorem Dei Gloriam</text>
+    </g>
+
+    <!-- SCENE 3: The Logo (Cross with AMDG Quadrants) -->
+    <g id="scene-3" class="scene inactive" style="transform-origin: center;">
         
-        .logo-static {
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.9));
-        }
+        <!-- Rotating Sunburst (Background) -->
+        <g id="sunburst-group" class="sunburst-container"></g>
         
-        /* Quadrant Letters */
-        .quad-char {
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            /* Reduced size for better spacing */
-            font-size: 60px; 
-            fill: url(#goldLinear);
-            text-anchor: middle;
-            dominant-baseline: middle;
-        }
+        <!-- Static Central Logo -->
+        <g class="logo-static" transform="translate(200, 200)">
+            
+            <!-- Solid backing circle to help legibility against rays -->
+            <circle cx="0" cy="0" r="110" fill="#000" opacity="0.6" />
 
-        @keyframes rotate-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="svg-container">
-        <svg viewBox="0 0 400 400" id="main-svg">
-            <defs>
-                <!-- Master Gold Gradient -->
-                <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#ffed8b;stop-opacity:1" />
-                    <stop offset="30%" style="stop-color:#ffd700;stop-opacity:1" />
-                    <stop offset="70%" style="stop-color:#b8860b;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#8b6508;stop-opacity:1" />
-                </linearGradient>
-
-                <!-- Radial for Sunburst -->
-                <radialGradient id="goldRadial" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                    <stop offset="40%" style="stop-color:#ffd700;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
-                </radialGradient>
-            </defs>
-
-            <!-- SCENE 1: AMDG (Acronym) -->
-            <g id="scene-1" class="scene inactive" style="transform-origin: center;">
-                <text x="200" y="200" class="text-amdg">A.M.D.G.</text>
-            </g>
-
-            <!-- SCENE 2: Full Phrase -->
-            <g id="scene-2" class="scene inactive" style="transform-origin: center;">
-                <text x="200" y="200" class="text-full">Ad Maiorem Dei Gloriam</text>
-            </g>
-
-            <!-- SCENE 3: The Logo (Cross with AMDG Quadrants) -->
-            <g id="scene-3" class="scene inactive" style="transform-origin: center;">
+            <!-- THE CROSS -->
+            <g fill="url(#goldLinear)">
+                <!-- Vertical Beam -->
+                <path d="M-15 -95 L15 -95 L15 95 L-15 95 Z" />
+                <!-- Horizontal Beam -->
+                <path d="M-75 -15 L75 -15 L75 15 L-75 15 Z" />
                 
-                <!-- Rotating Sunburst (Background) -->
-                <g id="sunburst-group" class="sunburst-container"></g>
-                
-                <!-- Static Central Logo -->
-                <g class="logo-static" transform="translate(200, 200)">
-                    
-                    <!-- Solid backing circle to help legibility against rays -->
-                    <circle cx="0" cy="0" r="110" fill="#000" opacity="0.6" />
-
-                    <!-- THE CROSS -->
-                    <g fill="url(#goldLinear)">
-                        <!-- Vertical Beam -->
-                        <path d="M-15 -95 L15 -95 L15 95 L-15 95 Z" />
-                        <!-- Horizontal Beam -->
-                        <path d="M-75 -15 L75 -15 L75 15 L-75 15 Z" />
-                        
-                        <!-- Serifs (Decorative ends for the cross) -->
-                        <!-- Top -->
-                        <path d="M-20 -95 L20 -95 L20 -85 L15 -85 L15 -90 L-15 -90 L-15 -85 L-20 -85 Z" />
-                        <!-- Bottom -->
-                        <path d="M-20 95 L20 95 L20 85 L15 85 L15 90 L-15 90 L-15 85 L-20 85 Z" />
-                        <!-- Left -->
-                        <path d="M-75 -20 L-75 20 L-65 20 L-65 15 L-70 15 L-70 -15 L-65 -15 L-65 -20 Z" />
-                        <!-- Right -->
-                        <path d="M75 -20 L75 20 L65 20 L65 15 L70 15 L70 -15 L65 -15 L65 -20 Z" />
-                    </g>
-
-                    <!-- THE LETTERS (A M D G) in Quadrants -->
-                    <!-- Positioned further out and centered vertically in spaces -->
-                    
-                    <!-- Top Left: A -->
-                    <text x="-50" y="-50" class="quad-char">A</text>
-                    
-                    <!-- Top Right: M -->
-                    <text x="50" y="-50" class="quad-char">M</text>
-                    
-                    <!-- Bottom Left: D -->
-                    <text x="-50" y="50" class="quad-char">D</text>
-                    
-                    <!-- Bottom Right: G -->
-                    <text x="50" y="50" class="quad-char">G</text>
-
-                </g>
+                <!-- Serifs (Decorative ends for the cross) -->
+                <!-- Top -->
+                <path d="M-20 -95 L20 -95 L20 -85 L15 -85 L15 -90 L-15 -90 L-15 -85 L-20 -85 Z" />
+                <!-- Bottom -->
+                <path d="M-20 95 L20 95 L20 85 L15 85 L15 90 L-15 90 L-15 85 L-20 85 Z" />
+                <!-- Left -->
+                <path d="M-75 -20 L-75 20 L-65 20 L-65 15 L-70 15 L-70 -15 L-65 -15 L-65 -20 Z" />
+                <!-- Right -->
+                <path d="M75 -20 L75 20 L65 20 L65 15 L70 15 L70 -15 L65 -15 L65 -20 Z" />
             </g>
-        </svg>
-    </div>
 
-    <script>
+            <!-- THE LETTERS (A M D G) in Quadrants -->
+            <!-- Top Left: A -->
+            <text x="-50" y="-50" class="quad-char">A</text>
+            
+            <!-- Top Right: M -->
+            <text x="50" y="-50" class="quad-char">M</text>
+            
+            <!-- Bottom Left: D -->
+            <text x="-50" y="50" class="quad-char">D</text>
+            
+            <!-- Bottom Right: G -->
+            <text x="50" y="50" class="quad-char">G</text>
+
+        </g>
+    </g>
+
+    <script type="text/javascript">
+        <![CDATA[
         // Generate Sunburst Rays for Scene 3
         const sunburstGroup = document.getElementById('sunburst-group');
         const numRays = 40; 
         const centerX = 200;
         const centerY = 200;
-        const innerRadius = 120; // Increased clearance for text
+        const innerRadius = 120;
         const outerRadiusLong = 210;
         const outerRadiusShort = 165;
 
@@ -269,9 +238,8 @@
             }, timings[currentStep]);
         }
 
-        window.onload = () => {
-            setTimeout(runSequence, 500);
-        };
+        // Start animation
+        setTimeout(runSequence, 500);
+        ]]>
     </script>
-</body>
-</html>
+</svg>
