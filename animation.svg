@@ -1,43 +1,46 @@
 <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&amp;family=Pinyon+Script&amp;display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
 
             .text-amdg {
-                font-family: 'Cinzel', serif;
-                font-weight: 700;
-                font-size: 80px;
+                font-family: 'Press Start 2P', monospace;
+                font-size: 48px;
                 fill: #ffd700;
                 text-anchor: middle;
                 dominant-baseline: middle;
-                filter: drop-shadow(0px 0px 15px rgba(255, 215, 0, 0.4));
+                image-rendering: pixelated;
+                shape-rendering: crispEdges;
             }
 
             .text-full {
-                font-family: 'Pinyon Script', cursive;
-                font-size: 36px;
+                font-family: 'Press Start 2P', monospace;
+                font-size: 18px;
                 fill: #f0f0f0;
                 text-anchor: middle;
                 dominant-baseline: middle;
-                filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.2));
+                image-rendering: pixelated;
+                shape-rendering: crispEdges;
             }
 
             .sunburst-container {
                 transform-origin: 200px 200px;
                 animation: rotate-slow 80s linear infinite;
+                shape-rendering: crispEdges;
             }
             
             .logo-static {
-                filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.9));
+                shape-rendering: crispEdges;
             }
             
             .quad-char {
-                font-family: 'Cinzel', serif;
-                font-weight: 700;
-                font-size: 60px;
+                font-family: 'Press Start 2P', monospace;
+                font-size: 40px;
                 fill: url(#goldLinear);
                 text-anchor: middle;
                 dominant-baseline: middle;
+                image-rendering: pixelated;
+                shape-rendering: crispEdges;
             }
 
             @keyframes rotate-slow {
@@ -46,17 +49,23 @@
             }
         </style>
 
-        <!-- Master Gold Gradient -->
+        <!-- Master Gold Gradient - Pixelated Stepped -->
         <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style="stop-color:#ffed8b;stop-opacity:1" />
-            <stop offset="30%" style="stop-color:#ffd700;stop-opacity:1" />
-            <stop offset="70%" style="stop-color:#b8860b;stop-opacity:1" />
+            <stop offset="25%" style="stop-color:#ffed8b;stop-opacity:1" />
+            <stop offset="25%" style="stop-color:#ffd700;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#ffd700;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#b8860b;stop-opacity:1" />
+            <stop offset="75%" style="stop-color:#b8860b;stop-opacity:1" />
+            <stop offset="75%" style="stop-color:#8b6508;stop-opacity:1" />
             <stop offset="100%" style="stop-color:#8b6508;stop-opacity:1" />
         </linearGradient>
 
-        <!-- Radial for Sunburst -->
+        <!-- Radial for Sunburst - Pixelated Stepped -->
         <radialGradient id="goldRadial" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
             <stop offset="40%" style="stop-color:#ffd700;stop-opacity:1" />
+            <stop offset="60%" style="stop-color:#ffd700;stop-opacity:1" />
+            <stop offset="60%" style="stop-color:#b8860b;stop-opacity:1" />
             <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
         </radialGradient>
     </defs>
@@ -91,6 +100,9 @@
             
             <!-- Solid backing circle -->
             <circle cx="0" cy="0" r="110" fill="#000" opacity="0.6" />
+            
+            <!-- Outer decorative circle -->
+            <circle cx="0" cy="0" r="120" fill="none" stroke="url(#goldLinear)" stroke-width="6" shape-rendering="crispEdges" />
 
             <!-- THE CROSS -->
             <g fill="url(#goldLinear)">
