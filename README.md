@@ -3,7 +3,7 @@
 - 👋 Hi, I’m @FrederykAbryan
 - 👀 I’m interested in coding, anime and reading
 - 🌱 I’m currently learning VueJS, React Native
-- 📫 How to reach me https://fabryan.fun/
+- 📫 How to reach me https://rechreia.com/
 
 <!---
 FrederykAbryan/FrederykAbryan is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
